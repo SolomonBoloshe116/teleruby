@@ -5,6 +5,7 @@ require_relative '../core_api'
 
 module Telegram
   module OtherApis
+    ##
     # Use this method to forward messages of any kind.
     def forward_message(from_chat_id, to_chat_id, message_id, params = {})
       hash = { chat_id: to_chat_id, from_chat_id: from_chat_id }
@@ -17,6 +18,7 @@ module Telegram
       data.result
     end
 
+    ##
     # Use this method to kick a user from a group, a supergroup
     # or a channel.
     def kick_chat_member(chat_id, user_id, params = {})
@@ -28,6 +30,7 @@ module Telegram
       data.result
     end
 
+    ##
     # Use this method to unban a previously kicked user in a
     # supergroup or channel.
     def unban_chat_member(chat_id, user_id)
@@ -39,6 +42,7 @@ module Telegram
       data.result
     end
 
+    ##
     # Use this method to restrict a user in a supergroup.
     def restrict_chat_member(chat_id, user_id, permissions, params = {})
       hash = { chat_id: chat_id, user_id: user_id }
@@ -51,6 +55,7 @@ module Telegram
       data.result
     end
 
+    ##
     # Use this method to promote or demote a user in a supergroup or
     # a channel.
     def promote_chat_member(chat_id, user_id, params = {})
@@ -62,6 +67,7 @@ module Telegram
       data.result
     end
 
+    ##
     # Use this method to generate a new invite link for a chat.
     def export_chat_link(chat_id)
       hash = { chat_id: chat_id }
@@ -72,6 +78,7 @@ module Telegram
       response.result
     end
 
+    ##
     # Use this method to pin a message in a group, a supergroup,
     # or a channel.
     def pin_chat_message(chat_id, message_id, params = {})
@@ -83,6 +90,7 @@ module Telegram
       response.result
     end
 
+    ##
     # Use this method to stop a poll which was sent by the bot.
     def stop_poll(chat_id, message_id, params = {})
       hash = { chat_id: chat_id, message_id: message_id }.merge!(params)
@@ -93,6 +101,7 @@ module Telegram
       response.result
     end
 
+    ##
     # Use this method to upload a .PNG file with a sticker for later use
     # in createNewStickerSet and addStickerToSet methods
     # (can be used multiple times).
@@ -105,6 +114,7 @@ module Telegram
       response.result
     end
 
+    ##
     # Use this method to create a new sticker set owned by a user.
     # The bot will be able to edit the sticker set thus created.
     # You must use exactly one of the fields png_sticker or tgs_sticker.
@@ -117,6 +127,7 @@ module Telegram
       response.result
     end
 
+    ##
     # Use this method to add a new sticker to a set created by the bot.
     def add_sticker_to_set(user_id, name, emojis, params = {})
       hash = { user_id: user_id, name: name, emojis: emojis }.merge!(params)
@@ -131,6 +142,7 @@ module Telegram
       fail NotImplementedError, 'not implemented'
     end
 
+    ##
     # Use this method to send answers to callback queries sent from inline
     # keyboards. The answer will be displayed to the user as a notification
     # at the top of the chat screen or as an alert. On success, True is
@@ -148,6 +160,7 @@ module Telegram
       fail NotImplementedError, 'not support for now'
     end
 
+    ##
     # Use this method to edit text and game messages. On success,
     # if edited message is sent by the bot, the edited Message is returned,
     # otherwise True is returned.
@@ -163,6 +176,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to edit captions of messages. On success, if edited
     # message is sent by the bot, the edited Message is returned, otherwise
     # True is returned.
@@ -177,6 +191,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to edit animation, audio, document, photo, or video
     # messages. If a message is a part of a message album, then it can be
     # edited only to a photo or a video. Otherwise, message type can be
@@ -196,6 +211,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to edit only the reply markup of messages. 
     # On success, if edited message is sent by the bot, the edited Message
     # is returned, otherwise True is returned.
@@ -210,6 +226,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send answers to an inline query. On success, True
     # is returned. No more than 50 results per query are allowed.
     def answer_inline_query(inline_query_id, result, params = {})

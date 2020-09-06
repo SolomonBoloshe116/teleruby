@@ -8,6 +8,7 @@ require_relative '../core_api'
 
 module Telegram
   module SendApis # rubocop:disable Metrics/ModuleLength
+    ##
     # Use this method to send text messages.
     def send_message(chat_id, text, params = {})
       hash = { chat_id: chat_id, text: text }.merge!(params)
@@ -18,6 +19,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send photos.
     def send_photo(chat_id, photo, params = {})
       hash = { chat_id: chat_id, photo: photo }.merge!(params)
@@ -28,6 +30,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send audio files.
     def send_audio(chat_id, audio, params = {})
       hash = { chat_id: chat_id, audio: audio }.merge!(params)
@@ -38,6 +41,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send general files.
     def send_document(chat_id, document, params = {})
       hash = { chat_id: chat_id, document: document }.merge!(params)
@@ -48,6 +52,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send video files, Telegram clients support
     # mp4 videos (other formats may be sent as Document).
     def send_video(chat_id, video, params = {})
@@ -59,6 +64,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send animation files (GIF or H.264/MPEG-4
     # AVC video without sound).
     def send_animation(chat_id, animation, params = {})
@@ -70,6 +76,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send voice file
     def send_voice(chat_id, voice, params = {})
       hash = { chat_id: chat_id, voice: voice }.merge!(params)
@@ -80,6 +87,8 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
+    # Use this methods to send video note file
     def send_video_note(chat_id, video_note, params = {})
       hash = { chat_id: chat_id, video_note: video_note }.merge!(params)
       response = post('sendVideoNote', hash)
@@ -89,6 +98,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send a group of photos or videos as an album.
     def send_media_group(chat_id, media, params = {})
       hash = { chat_id: chat_id, media: media }.merge!(params)
@@ -99,6 +109,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send point on the map.
     def send_location(chat_id, latitude, longitude, params = {})
       hash = { chat_id: chat_id, latitude: latitude, longitude: longitude}
@@ -110,6 +121,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send information about a venue.
     def send_venue(chat_id, latitude, longitude, title, address, params = {})
       hash = { chat_id: chat_id, latitude: latitude, longitude: longitude }
@@ -122,6 +134,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send phone contacts.
     def send_contact(chat_id, phone_number, first_name, params = {})
       hash = { chat_id: chat_id, phone_number: phone_number }
@@ -134,6 +147,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send a native poll.
     def send_poll(chat_id, question, options, params = {})
       hash = { chat_id: chat_id, question: question }
@@ -146,6 +160,7 @@ module Telegram
       Message.new(response.result)
     end
 
+    ##
     # Use this method to send an animated emoji that will display a 
     # random value.
     def send_dice(chat_id, params = {})
@@ -157,6 +172,11 @@ module Telegram
       Message.new(response.description)
     end
 
+    ##
+    # Use this methods to send chat actions
+    # actions may be typing upload_photo record_video upload_video
+    # upload_audio upload_document find_location record_video_note
+    # upload_video_note 
     def send_chat_action(chat_id, action) # rubocop:disable: Metrics/MethodLength
        actions = %w{ typing upload_photo record_video upload_video
        upload_audio upload_document find_location record_video_note
@@ -172,6 +192,8 @@ module Telegram
        response.result
     end
 
+    ##
+    # Use this method to send sticker file
     def send_sticker(chat_id, file, params = {})
       hash = { chat_id: chat_id, sticker: file }.merge!(params)
       response = post('sendSticker', hash)

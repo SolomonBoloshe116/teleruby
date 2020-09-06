@@ -16,11 +16,11 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install teleruby
+    $ sudo gem install teleruby
 
 Obtain a bot token from [@botfather](https://t.me/botfather)
 
-To test your bot's authentication token, use the +get_me+ method.
+To test your bot's authentication token, use the *get_me* method.
 
 ```ruby
 #!/usr/bin/ruby
@@ -74,7 +74,7 @@ update = -> { hash }
 updates = @bot.get_updates update.call
 ```
 
-Here +10+ shows, +10+ updates to be retrieved. Max limit is +100+. You can also limit type of updates!.
+Here 10 shows, 10 updates to be retrieved. Max limit is 100. You can also limit type of updates!.
 
 ```ruby
 up_dates = ['message', 'channel_post']
@@ -118,23 +118,20 @@ end
 # you can make it to echo all send messages!
 ```
 
-Telegram doesn't send left chat participant notification if your group members exceed +50+.
+Telegram doesn't send left chat participant notification if your group members exceed 50.
 
-+NB:+ To use actions like +pin_message+, +unpin_chat_message+, +promote_chat_member+ .... , your bot must have appropriate admin right in supergroup.
+*NB:* To use actions like pin_message, unpin_chat_message, promote_chat_member .... , your bot must have appropriate admin right in supergroup.
 
-+Note:+ Only get methods and send methods return object, the rest methods return hash object.
-From send methods, +send_chat_action+ does not return any object from the implemented ones.
-
-I put more description in each methods definition in the source file, so please download it and check it.
+*Note:* Only get methods and send methods return object, the rest methods return hash object.
 
 ##### NB:
-Sometimes optional methods return +irrelevant+, it may be +nil+ or +false+, so you have to check it.
+Sometimes optional methods return irrelevant, it may be nil or false, so you have to check it.
 
-If Telegram response is irrelevant but expected to return Telegram object, then +telegram_client.rb+ returns +false+ and if it is expected to return other info rather than Telegram object, it returns +nil+.
+If Telegram response is irrelevant but expected to return Telegram object, then teleruby returns false and if it is expected to return other info rather than Telegram object, it returns nil.
 
-Sample Message#forward_from
+![Sample](msg.png)
 
-+Example:+
+###### Example:
 
 ```ruby
 updates = @bot.get_updates
@@ -145,7 +142,7 @@ updates.eah do |update|
 end
 ```
 
-In the above case message is optional, when? if +bot+(client) gets channel post notification and blah blah
+In the above case, message is optional, when? if ```bot(client)``` gets channel post notification and blah blah.
 
 ### Custom Keyboard
 
@@ -212,10 +209,10 @@ msg = { reply_markup: all_buttons, resize_keyboard: true, one_time_keyboard: tru
 @bot.send_message(chat_id, question, msg)
 ```
 
-May be confused with +one_time_keyboard+?, well it makes keyboard to disappear after user clicks one button from the given choices.
-To know about +resize_keyboard+, remove it and send message, then see what you what you have got!
+May be confused with ```one_time_keyboard```?, well it makes keyboard to disappear after user clicks one button from the given choices.
+To know about ```resize_keyboard```, remove it and send message, then see what you have got!
 
-Check +callback_query+, to see which button is clicked from the given one.
+Check ```callback_query```, to see which button is clicked from the given one.
 
 ### Requesting Contact
 
@@ -299,7 +296,7 @@ You can also request +location+, and +request_poll+.
 * ```create_new_stricker_set(user_id, name, title, params)```
 * ```add_sticker_to_set(user_id, name, emojis, params)```
 
-If you wanna know available methods
+If you wanna know available methods:
 
 ```ruby
 irb(main):002:0> require 'teleruby'
@@ -308,8 +305,8 @@ irb(main):004:0> bot = Telegram::Client.new(token: 'dafasfasfasfasf')
 => #<Telegram::Client:0x0000560aee01caa8 @token="dafasfasfasfasf", @last_update=0>
 irb(main):005:0> bot.methods - self.methods
 ```
-Lists all available methods
 
+Lists all available methods.
 
 #### Available Objects
 
@@ -387,7 +384,7 @@ UserProfilePhotos
 
 Update
 
-Please download the source file and do ```rdoc``` from the root of dir, then go to doc, then open README_rdoc.html with your fav browser.
+Please download the source file and do ```rdoc``` from the root of dir, then go to doc/, then open README_rdoc.html with your fav browser.
 
 ![rdoc](rdoc.png)
 

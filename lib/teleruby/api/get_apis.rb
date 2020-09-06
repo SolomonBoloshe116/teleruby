@@ -3,11 +3,13 @@
 
 require_relative '../core_api'
 
+##
 # Solomon Boloshe(Lee Crey)
 # Friday, August 21 2020 04:52:49 PM +0300
 
 module Telegram
   module GetApis # rubocop:disable Metrics/ModuleLength
+    ##
     # Use this method to receive incoming updates using long polling.
     def get_updates(limit = 10, &block) # rubocop:disable Metrics/MethodLength
       blok = {}
@@ -27,7 +29,7 @@ module Telegram
 
       result = response.result
       if result.instance_of? Array
-        @last_update = result[-1]['update_id'] + 1 unless result[-1].nil?
+        @last_update = result.last.update_id + 1 if result.last
       end
 
       updates = []
@@ -81,6 +83,7 @@ module Telegram
       ProfilePhoto.new(result)
     end
 
+    ##
     # Use this method to get a list of administrators in a chat.
     def get_chat_admins(chat_id)
       unless chat_id.to_i.negative? # rubocop:disable Style/IfUnlessModifier
@@ -101,12 +104,13 @@ module Telegram
     end
     # rubocop:enable Metrics/MethodLength
 
+    ##
     # Use this method to get the number of members in a chat.
     def get_chat_members_count(chat_id)
       hash = { chat_id: chat_id }
       response = get('getChatMemebersCount', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise IdError, 'don\'t use private chat id'
+        raise IdError, %{don't use private chat id}
       end
       response.result
     end
@@ -126,17 +130,18 @@ module Telegram
       hash = { name: name }
       response = get('getStickerSetName', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        fail Error, 'incorrect sticker set name'
+        fail Error, %{incorrect sticker set name}
       end
       StickerSet.new(response.result)
     end
 
+    ##
     # Use this method to get up to date information about the chat.
     def get_chat(chat_id) # rubocop:disable Metrics/MethodLength
       hash = { chat_id: chat_id }
       response = get('getChat', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        fail IdError, 'incorrect chat id'
+        fail IdError, %{incorrect chat id}
       end
 
       if chat_id.negative?
@@ -145,11 +150,12 @@ module Telegram
       PrivateChat.new(response.result)
     end
 
+    ##
     # Use this method to get the current list of the bot's commands.
     def get_my_commands # rubocop:disable Metrics/MethodLength
       response = get('getMyCommands')
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        fail TokenError, 'seems token error'
+        fail TokenError, %{seems bot token error}
       end
 
       commands = []
