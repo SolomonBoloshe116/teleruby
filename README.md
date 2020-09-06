@@ -388,7 +388,8 @@ UserProfilePhotos
 Update
 
 Please download the source file and do ```rdoc``` from the root of dir, then go to doc, then open README_rdoc.html with your fav browser.
-![rdoc](entries.png)
+
+![rdoc](rdoc.png)
 
 #### Discussion Group On Telegram
 [hedase support](https://t.me/teleruby_support)
