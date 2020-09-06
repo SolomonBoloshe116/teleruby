@@ -18,7 +18,7 @@ Or install it yourself as:
 
     $ gem install teleruby
 
-Obtain a bot token from {@botfather}[https://t.me/botfather]
+Obtain a bot token from [@botfather](https://t.me/botfather)
 
 To test your bot's authentication token, use the +get_me+ method.
 
@@ -28,10 +28,10 @@ To test your bot's authentication token, use the +get_me+ method.
 
 require 'teleruby'
 
-@token = 'place-your-bot\'s-token-here'
-bot = Telegram::Client.new(token: @token)
+@token = %q{place-your-bot's-token-here}
+@bot = Telegram::Client.new(token: @token)
 
-me = bot.get_me
+me = @bot.get_me
 
 puts 'first name:' + me.first_name
 puts 'user name:' + me.username
@@ -55,7 +55,7 @@ For now this library supports only polling method.
 
 require 'teleruby'
 
-@token = 'place-your-bot\'s-token-here'
+@token = %q{place-your-bot's-token-here}
 @bot = Telegram::Client.new(token: @token)
 
 updates = @bot.get_updates
@@ -235,69 +235,69 @@ You can also request +location+, and +request_poll+.
 
 #### Send methods
 
-* +send_animation+(+chat_id+, +file_id+, +params+)
-* +send_audio+(+chat_id+, +file_id+, +params+)
-* +send_chat_action+(+chat_id+, +action+)
-* +send_contact+(+chat_id+, +phone_number+, +first_name+, +params+)
-* +send_document+(+chat_id+, +file_id+, +params+)
-* +send_dice+(+chat_id+, +params+)
-* +send_location+(+chat_id+, +latitude+, +longitude+, +params+)
-* +send_media_group+(+chat_id+, +file_id+, +params+)
-* +send_message+(+chat_id+, +text+, +params+)
-* +send_poll+(+chat_id+, +question+, +options+, +params+)
-* +send_voice+(+chat_id+, +file_id+, +params+)
-* +send_video+(+chat_id+, +file_id+, +params+)
-* +send_video_note+(+chat_id+, +file_id+, +params+)
-* +send_sticker+(+chat_id+, +file_id+, +params+)
-* +send_venue+(+chat_id+, +latitude+, +longitude+, +title+, +address+, +params+)
+* ```send_animation(chat_id, file_id, params)```
+* ```send_audio(chat_id, file_id, params)```
+* ```send_chat_action(chat_id, action)```
+* ```send_contact(chat_id, phone_number, first_name, params)```
+* ```send_document(chat_id, file_id, params)```
+* ```send_dice(chat_id, params)```
+* ```send_location+(chat_id, latitude, longitude, params)```
+* ```send_media_group(chat_id, file_id, params)```
+* ```send_message(chat_id+, text, params)```
+* ```send_poll(chat_id, question, options, params)```
+* ```send_voice(chat_id, file_id, params)```
+* ```send_video(chat_id, file_id, params)```
+* ```send_video_note(chat_id, file_id, params)```
+* ```send_sticker(chat_id, file_id, params)```
+* ```send_venue(chat_id, latitude, longitude, title, address, params)```
 
 #### Delete methods
 
-* +delete_message+(+chat_id+, +message_id+)
-* +delete_chat_photo+(+chat_id+)
-* +delete_chat_sticker_set+(+chat_id+)
-* +delete_sticker_from_set+(+sticker+)
+* ```delete_message(chat_id, message_id)```
+* ```delete_chat_photo(chat_id)```
+* ```delete_chat_sticker_set(chat_id)```
+* ```delete_sticker_from_set(sticker```)
 
 #### Set methods
 
-* +set_cutom_title+(+chat_id+, +user_id+, +title+)
-* +set_chat_permissions+(+chat_id+, +permissions+)
-* +set_chat_photo+(+chat_id+, +file+)
-* +set_chat_title+(+chat_id+, +title+)
-* +set_chat_sticker_set+(+chat_id+, +set_name+)
-* +set_my_command+(+command+)
-* +set_sticker_position_in_the_set+(+sticker+, +position+)
-* +set_sticker_set_thumb+(+name+, +user_id+, +params+)
-* +set_chat_description+(+chat_id+, +description+)
+* ```set_cutom_title(chat_id, user_id, title)```
+* ```set_chat_permissions(chat_id, permissions)```
+* ```set_chat_photo(chat_id, file)```
+* ```set_chat_title(chat_id, title)```
+* ```set_chat_sticker_set+(chat_id, set_name)```
+* ```set_my_command(command)```
+* ```set_sticker_position_in_the_set(sticker, position)```
+* ```set_sticker_set_thumb(name, user_id, params)```
+* ```set_chat_description(chat_id, description)```
  
 #### Get Methods
 
-* +get_updates+
-* +get_me+
-* +get_file+(+file_id+)
-* +get_profile_photos+(+user_id+, +params+)
-* +get_chat_admins+(+chat_id+)
-* +get_members_count+(+chat_id+)
-* +get_chat_member+(+chat_id+, +user_id+)
-* +get_sticker_set_name+(+name+)
-* +get_chat+(+chat_id+)
-* +get_my_commands+
+* ```get_updates``
+* ```get_me```
+* ```get_file(file_id)```
+* ```get_profile_photos(user_id, params)```
+* ```get_chat_admins(chat_id)```
+* ```get_members_count(chat_id)```
+* ```get_chat_member(chat_id, user_id)```
+* ```get_sticker_set_name(name)```
+* ```get_chat(chat_id)```
+* ```get_my_commands```
 
 #### Other methods
 
-* +forward_message+(+from_chat_id+, +to_chat_id+, +message_id+, +params+)
-* +kick_chat_member+(+chat_id+, +user_id+, +params+)
-* +unban_chat_member+(+chat_id+, +user_id+)
-* +restrict_chat_member+(+chat_id+, +user_id+, +permissions+, +params+)
-* +promote_chat_member+(+chat_id+, +user_id+, +params+)
-* +export_chat_link+(+chat_id+)
-* +pin_chat_message+(+chat_id+, +message_id+, +params+)
-* +unpin_chat_message+(+chat_id+)
-* +leave_chat+(+chat_id+)
-* +stop_poll+(+chat_id+, +message_id+, +params+)
-* +upload_sticker_file+(+user_id+, +png_sticker+)
-* +create_new_stricker_set+(+user_id+, +name+, +title+, +params+)
-* +add_sticker_to_set+(+user_id+, +name+, +emojis+, +params+)
+* ```forward_message(from_chat_id, to_chat_id, message_id, params)```
+* ```kick_chat_member(chat_id, user_id, params)```
+* ```unban_chat_member(chat_id, user_id)```
+* ```restrict_chat_member(chat_id, user_id, permissions, params)```
+* ```promote_chat_member(chat_id, user_id, params)``
+* ```export_chat_link(chat_id)```
+* ```pin_chat_message(chat_id, message_id, params)```
+* ```unpin_chat_message(chat_id)```
+* ```leave_chat(chat_id)```
+* ```stop_poll(chat_id, message_id, params)```
+* ```upload_sticker_file(user_id, png_sticker)```
+* ```create_new_stricker_set(user_id, name, title, params)```
+* ```add_sticker_to_set(user_id, name, emojis, params)```
 
 If you wanna know available methods
 
@@ -387,8 +387,8 @@ UserProfilePhotos
 
 Update
 
-Please download and do ```rdoc``` from the root of dir, then go to doc/README_rdoc.html open in your fav browser.
-![Dir structure](entries.png)
+Please download the source file and do ```rdoc``` from the root of dir, then go to doc, then open README_rdoc.html with your fav browser.
+![rdoc](entries.png)
 
 #### Discussion Group On Telegram
 [hedase support](https://t.me/teleruby_support)
@@ -401,16 +401,7 @@ Please download and do ```rdoc``` from the root of dir, then go to doc/README_rd
 4. Push to the branch (git push origin my-new-feature)
 5. Create new Pull Request
 
-
-
 ## License
 
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [GPLv3+](https://gnu.org/licenses/gpl.html).
 
-## Copyright (c) 2020 Solomon Boloshe([Lee Crey)](https://t.me/lee_crey)
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-```THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.```
