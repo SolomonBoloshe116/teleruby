@@ -62,7 +62,7 @@ updates = @bot.get_updates
 puts updates.inspect
 ```
 
-+NB:+ The default number of updates to be retrieved is +10+, but you can add yours like.
+*NB:* The default number of updates to be retrieved is *10*, but you can add yours like.
 
 ```ruby
 @bot = Telegram::Client.new(token: @token)
