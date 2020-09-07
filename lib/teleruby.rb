@@ -32,7 +32,7 @@ module Telegram
   # === Bot class
   class Client < TGClient
     include AllApis
-    def initialize(token: token)
+    def initialize(token)
       @token = token
       @last_update = 0
     end

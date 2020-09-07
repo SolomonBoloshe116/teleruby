@@ -29,7 +29,7 @@ To test your bot's authentication token, use the *get_me* method.
 require 'teleruby'
 
 @token = %q{place-your-bot's-token-here}
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
 me = @bot.get_me
 
@@ -56,7 +56,7 @@ For now this library supports only polling method.
 require 'teleruby'
 
 @token = %q{place-your-bot's-token-here}
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
 updates = @bot.get_updates
 puts updates.inspect
@@ -65,7 +65,7 @@ puts updates.inspect
 *NB:* The default number of updates to be retrieved is *10*, but you can add yours like.
 
 ```ruby
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
 hash = {}
 hash.limit = 10
@@ -84,7 +84,7 @@ hash.limit = 80
 hash.allowed_updates = up_dates
 update = -> { hash }
 
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 updates = @bot.get_updates update.call
 ```
 
