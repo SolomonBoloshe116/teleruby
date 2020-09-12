@@ -2,15 +2,17 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'teleruby'
-  spec.version       = '1.5.1'
-  spec.authors       = ['Solomon Boloshe(Lee Crey)']
-  spec.email         = ['SolomonMail835@gmail.com']
+  spec.version       = '1.5.4'
+  spec.date          = '2020-04-16'
+  spec.authors       = ['Solomon Boloshe(Gem dave)', 'NTB Bloodbath (Gem maintainer)']
+  spec.email         = ['SolomonBoloshe9@gmail.com']
   spec.summary       = %q{Simple ruby wrapper for Telegram bot}
-  spec.description   = %q{Lightweight ruby wrapper for Telegram bot.}
-  spec.homepage      = 'https://rubygems.org/gems/hedase'
-  spec.files         = Dir.glob('lib/*.rb') + ['teleruby.gemspec']
+  spec.description   = %q{Lightweight ruby wrapper for Telegram bot. Create awesome Telegram Bot with Teleruby.}
+  spec.homepage      = 'https://rubygems.org/gems/teleruby'
+  spec.files         = %w{msg.png rdoc.png README.md LICENSE.md teleruby.gemspec} + Dir.glob('lib/**/*.rb')
+
   spec.require_paths = ['lib']
-  spec.license       = 'GPLv3+'
+  spec.license       = 'GPL-3.0+'
   spec.date          = '2020-09-05'
   spec.required_ruby_version = '>= 2.3.0'
   spec.add_runtime_dependency 'faraday', '~> 1.0', '>= 1.0.0'

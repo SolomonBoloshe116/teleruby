@@ -29,7 +29,7 @@ To test your bot's authentication token, use the *get_me* method.
 require 'teleruby'
 
 @token = %q{place-your-bot's-token-here}
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
 me = @bot.get_me
 
@@ -56,7 +56,7 @@ For now this library supports only polling method.
 require 'teleruby'
 
 @token = %q{place-your-bot's-token-here}
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
 updates = @bot.get_updates
 puts updates.inspect
@@ -65,27 +65,18 @@ puts updates.inspect
 *NB:* The default number of updates to be retrieved is *10*, but you can add yours like.
 
 ```ruby
-@bot = Telegram::Client.new(@token)
+@bot = Telegram::Client.new(token: @token)
 
-hash = {}
-hash.limit = 10
-
-update = -> { hash }
-updates = @bot.get_updates update.call
+updates = @bot.get_updates(limit: 80)
 ```
 
-Here 10 shows, 10 updates to be retrieved. Max limit is 100. You can also limit type of updates!.
+Here 10 shows, 80 updates to be retrieved. Max limit is 100. You can also limit type of updates!.
 
 ```ruby
 up_dates = ['message', 'channel_post']
-hash = {}
-hash.limit = 80
 
-hash.allowed_updates = up_dates
-update = -> { hash }
-
-@bot = Telegram::Client.new(@token)
-updates = @bot.get_updates update.call
+@bot = Telegram::Client.new(token: @token)
+updates = @bot.get_updates(limit: 80, type: up_dates)
 ```
 
 In the above case bot will retrive 80 updates and only looks message and channel post notifications.
@@ -108,8 +99,10 @@ require 'teleruby'
   updates.each do |update|
     if update.msg?
       message = update.message
-      chat = message.chat
-      @bot.send_message(chat.id, message.text)
+      if message.text_msg?
+        chat = message.chat
+        @bot.send_message(chat.id, message.text)
+      end
     end
   end
 end
@@ -228,7 +221,7 @@ last = { reply_markup: msg, resize_keyboard: true, one_time_keyboard: true }
 @bot.send_message(chat_id, msg, last)
 ```
 
-You can also request +location+, and +request_poll+.
+You can also request *location*, and *request_poll*.
 
 #### Send methods
 
@@ -389,7 +382,7 @@ Please download the source file and do ```rdoc``` from the root of dir, then go 
 ![rdoc](rdoc.png)
 
 #### Discussion Group On Telegram
-[hedase support](https://t.me/teleruby_support)
+[teleruby support](https://t.me/teleruby_support)
 
 ## Contributing
 
