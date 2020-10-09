@@ -14,7 +14,7 @@ module Telegram
       hash = { chat_id: chat_id, text: text }.merge!(params)
       response = http_post('sendMessage', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -24,7 +24,7 @@ module Telegram
       hash = { chat_id: chat_id, photo: photo }.merge!(params)
       response = http_post('sendPhoto', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -34,7 +34,7 @@ module Telegram
       hash = { chat_id: chat_id, audio: audio }.merge!(params)
       response = http_post('sendAudio', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -44,7 +44,7 @@ module Telegram
       hash = { chat_id: chat_id, document: document }.merge!(params)
       response = http_post('sendDocument', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -55,7 +55,7 @@ module Telegram
       hash = { chat_id: chat_id, video: video }.merge!(params)
       response = http_post('sendVideo', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-         raise FatalError, response.description
+         fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -66,7 +66,7 @@ module Telegram
       hash = { chat_id: chat_id, animation: animation }.merge!(params)
       response = http_post('sendAnimation', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -76,7 +76,7 @@ module Telegram
       hash = { chat_id: chat_id, voice: voice }.merge!(params)
       response = http_post('sendVoice', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -86,7 +86,7 @@ module Telegram
       hash = { chat_id: chat_id, video_note: video_note }.merge!(params)
       response = http_post('sendVideoNote', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -96,7 +96,7 @@ module Telegram
       hash = { chat_id: chat_id, media: media }.merge!(params)
       response = http_post('sendMediaGroup', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -107,7 +107,7 @@ module Telegram
       hash.merge!(params)
       response = http_post('sendLocation', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -119,7 +119,7 @@ module Telegram
       hash.merge!(hash2)
       response = http_post('sendVenue', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        throw FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -131,7 +131,7 @@ module Telegram
       hash.merge!(hash2)
       response = http_post('sendContact', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -143,7 +143,7 @@ module Telegram
       hash.merge!(hash2)
       response = http_post('sendPoll', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end
@@ -154,7 +154,7 @@ module Telegram
       hash = { chat_id: chat_id}.merge!(params)
       response = http_post('sendDice', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.description)
     end
@@ -168,12 +168,12 @@ module Telegram
        upload_audio upload_document find_location record_video_note
        upload_video_note }
        unless actions.include? action # rubocop:disable Style/IfUnlessModifier
-         raise Error, 'invalid chat action'
+         throw Error, 'invalid chat action'
        end
        hash = { chat_id: chat_id, action: action }
        response = http_post('sendChatAction', hash)
        unless response.ok # rubocop:disable Style/IfUnlessModifier
-         raise IdError, 'incorrect chat id'
+         fail IdError, 'incorrect chat id'
        end
        response.result
     end
@@ -183,7 +183,7 @@ module Telegram
       hash = { chat_id: chat_id, sticker: file }.merge!(params)
       response = http_post('sendSticker', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       Message.new(response.result)
     end

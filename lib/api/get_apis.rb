@@ -11,14 +11,20 @@ module Telegram
   module GetApis # rubocop:disable Metrics/ModuleLength
     include CoreApi
     # Use this method to receive incoming updates using long polling.
-    def get_updates(limit: 10, type: nil) # rubocop:disable Metrics/MethodLength
-      hash = { 'timeout': 0, 'limit': limit, 'offset': @last_update }
-      if type and (type.instance_of? Array)
-        hash.merge!({ allowed_updates: type })
+    def get_updates(limit = 10, &block) # rubocop:disable Metrics/MethodLength
+      blok = {}
+      if block_given?
+        blok = block.call
+        unless blok.instance_of? Hash # rubocop:disable Style/IfUnlessModifier
+          fail ArgumentError, 'expected object is hash'
+        end
       end
+
+      hash = { 'timeout': 0, 'limit': limit, 'offset': @last_update }
+      hash.merge!(blok)
       response = http_get('getUpdates', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, response.desciption
+        fail TelegramError, response.desciption
       end
 
       result = response.result
@@ -38,7 +44,7 @@ module Telegram
     def get_me
       response = http_get('getMe')
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TokenError, 'incorrect bot token'
+        fail TokenError, 'incorrect bot token'
       end
       BotUser.new(response.result)
     end
@@ -49,7 +55,7 @@ module Telegram
       hash = { file_id: file_id }
       response = http_get('getFile', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise IdError, 'incorrect file id'
+        fail IdError, 'incorrect file id'
       end
       TFile.new(response.result)
     end
@@ -57,13 +63,13 @@ module Telegram
     # Use this method to get a list of profile pictures for a user.
     def get_profile_photos(user_id, params = {}) # rubocop:disable Metrics/MethodLength
       if user_id.to_i.negative? # rubocop:disable Style/IfUnlessModifier
-        raise IdError, 'id must be private chat\'s id'
+        fail IdError, 'id must be private chat\'s id'
       end
 
       hash = { uesr_id: user_id }.merge!(params)
       response = http_get('getProfilePhotos', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, response.description
+        fails TelegramError, response.description
       end
 
       result = response.result
@@ -80,12 +86,12 @@ module Telegram
     # Use this method to get a list of administrators in a chat.
     def get_chat_admins(chat_id)
       unless chat_id.to_i.negative? # rubocop:disable Style/IfUnlessModifier
-        raise IdError, 'chat id must be supergroup id'
+        fail IdError, 'chat id must be supergroup id'
       end
       hash = { chat_id: chat_id }
       response = http_get('getChatAdministrators', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, 'fatal error'
+        fail FatalError, 'fatal error'
       end
 
       result = response.result
@@ -112,7 +118,7 @@ module Telegram
       hash = { chat_id: chat_id, user_id: user_id }
       response = http_get('getChatMember', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       ChatMember.new(response.result)
     end
@@ -122,7 +128,7 @@ module Telegram
       hash = { name: name }
       response = http_get('getStickerSetName', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise Error, %{incorrect sticker set name}
+        fail Error, %{incorrect sticker set name}
       end
       StickerSet.new(response.result)
     end
@@ -132,7 +138,7 @@ module Telegram
       hash = { chat_id: chat_id }
       response = http_get('getChat', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise IdError, %{incorrect chat id}
+        fail IdError, %{incorrect chat id}
       end
 
       if chat_id.negative?
@@ -145,7 +151,7 @@ module Telegram
     def get_my_commands # rubocop:disable Metrics/MethodLength
       response = http_get('getMyCommands')
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TokenError, %{seems bot token error}
+        fail TokenError, %{seems bot token error}
       end
 
       commands = []
@@ -156,7 +162,7 @@ module Telegram
       commands
     end
   end
-  # rubocop:enable Metrics/ModuleLength
+  # rubocop:enable Metrics/MethodLength
 
   # The End!
 end

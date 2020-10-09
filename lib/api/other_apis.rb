@@ -13,18 +13,18 @@ module Telegram
       hash.merge!(hash2)
       data = http_post('forwardMessage', hash)
       unless data.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, data.description
+        fail TelegramError, data.description
       end
       data.result
     end
-
+ 
     # Use this method to kick a user from a group, a supergroup
     # or a channel.
     def kick_chat_member(chat_id, user_id, params = {})
       hash = { chat_id: chat_id, user_id: user_id }.merge!(params)
       data = http_post('kickChatMember', hash)
       unless data.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, data.description
+        fail TelegramError, data.description
       end
       data.result
     end
@@ -35,7 +35,7 @@ module Telegram
       hash = { chat_id: chat_id, user_id: user_id }
       data = http_post('unbanChatMember', hash)
       unless data.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, data.description
+        fail TelegramError, data.description
       end
       data.result
     end
@@ -47,7 +47,7 @@ module Telegram
       hash.merge!(hash2)
       data = http_post('restrictChatMember', hash)
       unless data.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, data.description
+        fail TelegramError, data.description
       end
       data.result
     end
@@ -58,7 +58,7 @@ module Telegram
       hash = { chat_id: chat_id, user_id: user_id }.merge!(params)
       data = http_post('promoteChatMember', hash)
       unless data.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, data.description
+        fail TelegramError, data.description
       end
       data.result
     end
@@ -68,7 +68,7 @@ module Telegram
       hash = { chat_id: chat_id }
       response = http_post('exportChatInviteLink', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, response.description
+        fail TelegramError, response.description
       end
       response.result
     end
@@ -79,7 +79,7 @@ module Telegram
       hash = { chat_id: chat_id, message_id: message_id }.merge!(params)
       response = http_post('pinChatMessage', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise SecurityError, response.description
+        fail SecurityError, response.description
       end
       response.result
     end
@@ -89,7 +89,7 @@ module Telegram
       hash = { chat_id: chat_id, message_id: message_id }.merge!(params)
       response = http_post('stopPoll', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise Error, response.description
+        fail Error, response.description
       end
       response.result
     end
@@ -101,7 +101,7 @@ module Telegram
       hash = { user_id: user_id, png_sticker: png_sticker }
       response = http_post('uploadStickerFile', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise Error, response.description
+        fail Error, response.description
       end
       response.result
     end
@@ -113,7 +113,7 @@ module Telegram
       hash = { user_id: user_id, name: name, title: title }.merge!(params)
       response = http_post('createNewStickerSet', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise Error, response.description
+        fail Error, response.description
       end
       response.result
     end
@@ -123,13 +123,13 @@ module Telegram
       hash = { user_id: user_id, name: name, emojis: emojis }.merge!(params)
       response = http_post('addStickerToSet', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise StandardError, response.description
+        throw StandardError, response.description
       end
       response.result
     end
 
     def edit_message_live_location
-      raise NotImplementedError, 'not implemented'
+      fail NotImplementedError, 'not implemented'
     end
 
     # Use this method to send answers to callback queries sent from inline
@@ -146,7 +146,7 @@ module Telegram
     end
 
     def delete_webhook
-      raise NotImplementedError, 'not support for now'
+      fail NotImplementedError, 'not support for now'
     end
 
     # Use this method to edit text and game messages. On success,
@@ -156,7 +156,7 @@ module Telegram
       hash = { text: text }.merge!(params)
       response = http_post('editMessageText', hash)
       unless response.ok
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       if response.result == true
         return true
@@ -170,7 +170,7 @@ module Telegram
     def edit_message_caption(params = {})
       response = http_post('editMessageCaption', params)
       unless response.ok
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       if response.result == true
         return true
@@ -189,7 +189,7 @@ module Telegram
       hash = { media: media }.merge!(params)
       response = http_post('editMessageMedia', hash)
       unless response.ok
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       if response.result == true
         return true
@@ -203,7 +203,7 @@ module Telegram
     def edit_message_reply_markup(params = {})
       response = http_post('editMessageReplyMarkup', params)
       unless response.ok
-        raise FatalError, response.description
+        fail FatalError, response.description
       end
       if response.result == true
         return true
@@ -217,7 +217,7 @@ module Telegram
       hash = { inline_query_id: inline_query_id, result: result }.merge!(params)
       response = http_post('answerInlineQuery', hash)
       unless response.ok
-       raise FatalError, response.description
+       fail FatalError, response.description
       end
       response.result
     end

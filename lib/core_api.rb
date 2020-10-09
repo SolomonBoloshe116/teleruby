@@ -1,8 +1,10 @@
 #!/usr/bin/ruby
+# frozen_string_literal: true 
 
 require 'faraday'
 require 'json'
-require_relative 'objects/all'
+require 'require_all'
+require_all 'objects'
 
 module Telegram
   class Error < StandardError; end

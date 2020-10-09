@@ -2,15 +2,18 @@
 # frozen_string_literal: true
 
 require 'open-uri'
+require '../core_api'
 
 module Telegram
   module NonStandard
+    include CoreApi
     def download_file(file_d, dir = Dir.pwd)
-      raise NotImplementedError, 'not implemented'
+      d = Dir.new(dir)
     end
 
     def download_file_from(uri, dir = Dir.pwd)
       uri = URI.parse(uri)
+      
     end
 
     # use 'markdown'

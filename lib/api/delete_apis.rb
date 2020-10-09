@@ -9,13 +9,13 @@ module Telegram
     # Use this method to delete a chat photo.
     def delete_chat_photo(chat_id)
       unless chat_id.to_i.negative?
-        raise BadRequestError, %{can't delete private chat photo}
+        fail BadRequestError, %{can't delete private chat photo}
       end
 
       hash = { chat_id: chat_id }
       response = http_post('deleteChatPhoto', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise PermissionError, response.description
+        fail PermissionError, response.description
       end
 
       response.result
@@ -24,13 +24,13 @@ module Telegram
     # Use this method to delete a group sticker set from a supergroup.
     def delete_chat_sticker_set(chat_id)
       unless chat_id.to_i.negative?
-        raise BadRequestError, %{can' delete sticker set of private chat}
+        fail BadRequestError, %{can' delete sticker set of private chat}
       end
 
       hash = { chat_id: chat_id }
       response = http_post('deleteChatStickerSet', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise PermissionError, response.description
+        fail PermissionError, response.description
       end
 
       response.result
@@ -41,7 +41,7 @@ module Telegram
       hash = { chat_id: chat_id, message_id: message_id }
       response = http_post('deleteMessage', hash)
       unless response.ok # rubocop:disable Style/IfUnlessModifier
-        raise TelegramError, response.description
+        fail TelegramError, response.description
       end
 
       response.result
@@ -49,7 +49,7 @@ module Telegram
 
     # Use this method to delete a sticker from a set created by the bot.
     def delete_sticker_from_set(sticker)
-      raise NotImplementedError, 'currently not supported'
+      throw NotImplementedError, 'currently not supported'
     end
   end
 end
