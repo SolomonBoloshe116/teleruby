@@ -3,8 +3,7 @@
 
 require 'faraday'
 require 'json'
-require 'require_all'
-require_all 'objects'
+require_relative 'objects/all'
 
 module Telegram
   class Error < StandardError; end

@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 require 'open-uri'
-require '../core_api'
+require_relative '../core_api'
 
 module Telegram
   module NonStandard

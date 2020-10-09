@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = 'teleruby'
-  spec.version       = '1.5.5'
+  spec.version       = '1.5.6'
   spec.date          = '2020-04-16'
   spec.authors       = ['Solomon Boloshe(Gem dave)', 'NTB Bloodbath (Gem maintainer)']
   spec.email         = ['SolomonBoloshe9@gmail.com']
